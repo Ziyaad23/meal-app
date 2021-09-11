@@ -24,20 +24,20 @@ import com.ziyaad.meal_app.ui.model.response.MealResponse
 import com.ziyaad.meal_app.ui.theme.MealappTheme
 
 @Composable
-fun MealCategoriesScreen() {
+fun MealCategoriesScreen(navigationCallback:(String) -> Unit) {
     //Bind viewModel to composable
     val viewModel: MealsCategoriesViewModel = viewModel()
     val meals = viewModel.mealState.value
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
         items(meals) { meal ->
-            MealCategory(meal)
+            MealCategory(meal, navigationCallback)
         }
     }
 }
 
 @Composable
-fun MealCategory(meal: MealResponse) {
+fun MealCategory(meal: MealResponse, navigationCallback:(String) -> Unit) {
     var isExpanded by remember { mutableStateOf(false) }
 
     Card(
@@ -46,6 +46,9 @@ fun MealCategory(meal: MealResponse) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 16.dp)
+            .clickable{
+                navigationCallback(meal.id)
+            }
     ) {
         Row(
             modifier = Modifier
@@ -102,6 +105,6 @@ fun MealCategory(meal: MealResponse) {
 @Composable
 fun DefaultPreview() {
     MealappTheme {
-        MealCategoriesScreen()
+        //MealCategoriesScreen()
     }
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MealsCategoriesViewModel (private val repository: MealsRepository = MealsRepository()): ViewModel(){
+class MealsCategoriesViewModel (private val repository: MealsRepository = MealsRepository.getInstance()): ViewModel(){
 
     init {
         Log.d("TAG_COROUTINES", "we are about to launch a coroutine") // 1
